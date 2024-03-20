@@ -1,5 +1,3 @@
 class RestEndPoint {
-  static String baseUrl = "https://fakestoreapi.com";
-
-  static String products = "/products";
+  static String topHeadlines = "top-headlines";
 }

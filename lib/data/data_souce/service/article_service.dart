@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:mobile_news_with_bloc/data/constants/rest_end_poind.dart';
+import 'package:mobile_news_with_bloc/data/constants/rest_query_keys.dart';
 
 @LazySingleton()
 class ArticleService {
@@ -11,13 +13,13 @@ class ArticleService {
       {required String country,
       required String category,
       required String sortBy}) async {
-    final queryParamete = {
-      "country": country,
-      "category": category,
-      "sortBy": sortBy
+    final queryParameters = {
+      RestQueryKeys.queryCountry: country,
+      RestQueryKeys.queryCategory: category,
+      RestQueryKeys.querySort: sortBy
     };
-    final response =
-        await _dio.get("top-headlines", queryParameters: queryParamete);
+    final response = await _dio.get(RestEndPoint.topHeadlines,
+        queryParameters: queryParameters);
     return response;
   }
 }
