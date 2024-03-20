@@ -15,15 +15,10 @@ class ReadLaterPage extends StatelessWidget {
     return BlocProvider(
       lazy: false,
       create: (_) => getIt<ReadLaterBloc>(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('ReadLater'),
-        ),
-        body: BlocListener<ReadLaterBloc, ReadLaterState>(
-          listenWhen: (_, state) => state is ReadLaterListenable,
-          listener: (context, listenable) {},
-          child: const ReadLaterView(),
-        ),
+      child: BlocListener<ReadLaterBloc, ReadLaterState>(
+        listenWhen: (_, state) => state is ReadLaterListenable,
+        listener: (context, listenable) {},
+        child: const ReadLaterView(),
       ),
     );
   }

@@ -4,7 +4,12 @@ abstract class DashboardState {}
 
 @freezed
 class DashboardBuildable extends DashboardState with _$DashboardBuildable {
-  const factory DashboardBuildable() = _DashboardBuildable;
+  const factory DashboardBuildable({
+    @Default([]) List<Article> breakingArticles,
+    @Default(LoadingState.loading) LoadingState breakingArticlesState,
+    @Default([]) List<Article> topStoreArticles,
+    @Default(LoadingState.loading) LoadingState topStoreArticlesState,
+  }) = _DashboardBuildable;
 }
 
 @freezed

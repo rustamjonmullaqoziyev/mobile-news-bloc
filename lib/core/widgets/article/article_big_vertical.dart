@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,31 +6,20 @@ import 'package:mobile_news_with_bloc/core/utils/utils.dart';
 
 import '../../../domain/modules/article.dart';
 
-class DetailView extends StatelessWidget {
-  const DetailView({super.key, required this.article});
+class ArticleBigVerticalWidget extends StatelessWidget {
+  const ArticleBigVerticalWidget(
+      {super.key, required this.article, required this.callback});
 
   final Article article;
+  final Function(Article article) callback;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: const Color(0xFFF0F0F0),
-        appBar: AppBar(
-          backgroundColor: const Color(0xFFF0F0F0),
-          title: article.title.w(500).s(16).c(Colors.black),
-          leading: IconButton(
-            onPressed: () {
-              context.router.maybePop();
-            },
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-            ),
-          ),
-        ),
-        body: Container(
+    return InkWell(
+        onTap: () => callback(article),
+        child: Container(
           width: double.infinity,
-          height: double.infinity,
+          height: 300,
           margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
@@ -44,7 +32,7 @@ class DetailView extends StatelessWidget {
               children: [
                 SizedBox(
                   width: double.infinity,
-                  height: 200,
+                  height: 150,
                   child: CachedNetworkImage(
                     fit: BoxFit.fill,
                     imageBuilder: (context, url) => Container(
@@ -69,29 +57,25 @@ class DetailView extends StatelessWidget {
                         const Icon(Icons.error),
                   ),
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: 10),
                 article.sourceName
                     .w(500)
                     .s(20)
                     .c(Colors.black)
                     .copyWith(maxLines: 1, overflow: TextOverflow.ellipsis),
                 const SizedBox(height: 10),
-                article.description.w(400).s(15).c(Colors.black).copyWith(
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                Expanded(
+                    child: article.title.w(400).s(15).c(Colors.black).copyWith(
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        )),
                 const SizedBox(height: 10),
                 article.publishedAt != null
                     ? article.publishedAt!.formattedDate
                         .w(400)
                         .s(16)
                         .c(Colors.grey)
-                    : "".w(400).s(16).c(Colors.grey),
-                const SizedBox(height: 10),
-                article.content.w(400).s(15).c(Colors.black).copyWith(
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                    : "".w(400).s(16).c(Colors.grey)
               ]),
         ));
   }

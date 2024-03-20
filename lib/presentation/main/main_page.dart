@@ -17,16 +17,11 @@ class MainPage extends StatelessWidget {
     return BlocProvider(
       lazy: false,
       create: (_) => getIt<MainBloc>(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Main'),
-        ),
-        body: BlocListener<MainBloc, MainState>(
+      child: BlocListener<MainBloc, MainState>(
           listenWhen: (_, state) => state is MainListenable,
           listener: (context, listenable) {},
           child: const MainView(),
         ),
-      ),
     );
   }
 }

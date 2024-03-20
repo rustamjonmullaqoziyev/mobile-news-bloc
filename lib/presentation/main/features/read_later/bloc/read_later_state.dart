@@ -4,7 +4,10 @@ abstract class ReadLaterState {}
 
 @freezed
 class ReadLaterBuildable extends ReadLaterState with _$ReadLaterBuildable {
-  const factory ReadLaterBuildable() = _ReadLaterBuildable;
+  const factory ReadLaterBuildable({
+    @Default([]) List<Article> readLaterArticles,
+    @Default(LoadingState.loading) LoadingState readLaterArticlesState,
+  }) = _ReadLaterBuildable;
 }
 
 @freezed

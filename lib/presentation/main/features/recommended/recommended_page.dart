@@ -14,18 +14,12 @@ class RecommendedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      lazy: false,
-      create: (_) => getIt<RecommendedBloc>(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Recommended'),
-        ),
-        body: BlocListener<RecommendedBloc, RecommendedState>(
+        lazy: false,
+        create: (_) => getIt<RecommendedBloc>(),
+        child: BlocListener<RecommendedBloc, RecommendedState>(
           listenWhen: (_, state) => state is RecommendedListenable,
           listener: (context, listenable) {},
           child: const RecommendedView(),
-        ),
-      ),
-    );
+        ));
   }
 }

@@ -1,3 +1,3 @@
 class Constants {
-  static String baseUrl = "http://base_url/";
+  static String baseUrl = "https://newsapi.org/v2/";
 }

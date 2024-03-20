@@ -16,15 +16,10 @@ class DashboardPage extends StatelessWidget {
     return BlocProvider(
       lazy: false,
       create: (_) => getIt<DashboardBloc>(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Dashboard'),
-        ),
-        body: BlocListener<DashboardBloc, DashboardState>(
-          listenWhen: (_, state) => state is DashboardListenable,
-          listener: (context, listenable) {},
-          child: const DashboardView(),
-        ),
+      child: BlocListener<DashboardBloc, DashboardState>(
+        listenWhen: (_, state) => state is DashboardListenable,
+        listener: (context, listenable) {},
+        child: const DashboardView(),
       ),
     );
   }

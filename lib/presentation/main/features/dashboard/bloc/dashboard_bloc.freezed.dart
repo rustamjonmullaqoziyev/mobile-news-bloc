@@ -15,13 +15,28 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$DashboardBuildable {}
+mixin _$DashboardBuildable {
+  List<Article> get breakingArticles => throw _privateConstructorUsedError;
+  LoadingState get breakingArticlesState => throw _privateConstructorUsedError;
+  List<Article> get topStoreArticles => throw _privateConstructorUsedError;
+  LoadingState get topStoreArticlesState => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $DashboardBuildableCopyWith<DashboardBuildable> get copyWith =>
+      throw _privateConstructorUsedError;
+}
 
 /// @nodoc
 abstract class $DashboardBuildableCopyWith<$Res> {
   factory $DashboardBuildableCopyWith(
           DashboardBuildable value, $Res Function(DashboardBuildable) then) =
       _$DashboardBuildableCopyWithImpl<$Res, DashboardBuildable>;
+  @useResult
+  $Res call(
+      {List<Article> breakingArticles,
+      LoadingState breakingArticlesState,
+      List<Article> topStoreArticles,
+      LoadingState topStoreArticlesState});
 }
 
 /// @nodoc
@@ -33,13 +48,49 @@ class _$DashboardBuildableCopyWithImpl<$Res, $Val extends DashboardBuildable>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? breakingArticles = null,
+    Object? breakingArticlesState = null,
+    Object? topStoreArticles = null,
+    Object? topStoreArticlesState = null,
+  }) {
+    return _then(_value.copyWith(
+      breakingArticles: null == breakingArticles
+          ? _value.breakingArticles
+          : breakingArticles // ignore: cast_nullable_to_non_nullable
+              as List<Article>,
+      breakingArticlesState: null == breakingArticlesState
+          ? _value.breakingArticlesState
+          : breakingArticlesState // ignore: cast_nullable_to_non_nullable
+              as LoadingState,
+      topStoreArticles: null == topStoreArticles
+          ? _value.topStoreArticles
+          : topStoreArticles // ignore: cast_nullable_to_non_nullable
+              as List<Article>,
+      topStoreArticlesState: null == topStoreArticlesState
+          ? _value.topStoreArticlesState
+          : topStoreArticlesState // ignore: cast_nullable_to_non_nullable
+              as LoadingState,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$DashboardBuildableImplCopyWith<$Res> {
+abstract class _$$DashboardBuildableImplCopyWith<$Res>
+    implements $DashboardBuildableCopyWith<$Res> {
   factory _$$DashboardBuildableImplCopyWith(_$DashboardBuildableImpl value,
           $Res Function(_$DashboardBuildableImpl) then) =
       __$$DashboardBuildableImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {List<Article> breakingArticles,
+      LoadingState breakingArticlesState,
+      List<Article> topStoreArticles,
+      LoadingState topStoreArticlesState});
 }
 
 /// @nodoc
@@ -49,30 +100,129 @@ class __$$DashboardBuildableImplCopyWithImpl<$Res>
   __$$DashboardBuildableImplCopyWithImpl(_$DashboardBuildableImpl _value,
       $Res Function(_$DashboardBuildableImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? breakingArticles = null,
+    Object? breakingArticlesState = null,
+    Object? topStoreArticles = null,
+    Object? topStoreArticlesState = null,
+  }) {
+    return _then(_$DashboardBuildableImpl(
+      breakingArticles: null == breakingArticles
+          ? _value._breakingArticles
+          : breakingArticles // ignore: cast_nullable_to_non_nullable
+              as List<Article>,
+      breakingArticlesState: null == breakingArticlesState
+          ? _value.breakingArticlesState
+          : breakingArticlesState // ignore: cast_nullable_to_non_nullable
+              as LoadingState,
+      topStoreArticles: null == topStoreArticles
+          ? _value._topStoreArticles
+          : topStoreArticles // ignore: cast_nullable_to_non_nullable
+              as List<Article>,
+      topStoreArticlesState: null == topStoreArticlesState
+          ? _value.topStoreArticlesState
+          : topStoreArticlesState // ignore: cast_nullable_to_non_nullable
+              as LoadingState,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$DashboardBuildableImpl implements _DashboardBuildable {
-  const _$DashboardBuildableImpl();
+  const _$DashboardBuildableImpl(
+      {final List<Article> breakingArticles = const [],
+      this.breakingArticlesState = LoadingState.loading,
+      final List<Article> topStoreArticles = const [],
+      this.topStoreArticlesState = LoadingState.loading})
+      : _breakingArticles = breakingArticles,
+        _topStoreArticles = topStoreArticles;
+
+  final List<Article> _breakingArticles;
+  @override
+  @JsonKey()
+  List<Article> get breakingArticles {
+    if (_breakingArticles is EqualUnmodifiableListView)
+      return _breakingArticles;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_breakingArticles);
+  }
+
+  @override
+  @JsonKey()
+  final LoadingState breakingArticlesState;
+  final List<Article> _topStoreArticles;
+  @override
+  @JsonKey()
+  List<Article> get topStoreArticles {
+    if (_topStoreArticles is EqualUnmodifiableListView)
+      return _topStoreArticles;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_topStoreArticles);
+  }
+
+  @override
+  @JsonKey()
+  final LoadingState topStoreArticlesState;
 
   @override
   String toString() {
-    return 'DashboardBuildable()';
+    return 'DashboardBuildable(breakingArticles: $breakingArticles, breakingArticlesState: $breakingArticlesState, topStoreArticles: $topStoreArticles, topStoreArticlesState: $topStoreArticlesState)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DashboardBuildableImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$DashboardBuildableImpl &&
+            const DeepCollectionEquality()
+                .equals(other._breakingArticles, _breakingArticles) &&
+            (identical(other.breakingArticlesState, breakingArticlesState) ||
+                other.breakingArticlesState == breakingArticlesState) &&
+            const DeepCollectionEquality()
+                .equals(other._topStoreArticles, _topStoreArticles) &&
+            (identical(other.topStoreArticlesState, topStoreArticlesState) ||
+                other.topStoreArticlesState == topStoreArticlesState));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_breakingArticles),
+      breakingArticlesState,
+      const DeepCollectionEquality().hash(_topStoreArticles),
+      topStoreArticlesState);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DashboardBuildableImplCopyWith<_$DashboardBuildableImpl> get copyWith =>
+      __$$DashboardBuildableImplCopyWithImpl<_$DashboardBuildableImpl>(
+          this, _$identity);
 }
 
 abstract class _DashboardBuildable implements DashboardBuildable {
-  const factory _DashboardBuildable() = _$DashboardBuildableImpl;
+  const factory _DashboardBuildable(
+      {final List<Article> breakingArticles,
+      final LoadingState breakingArticlesState,
+      final List<Article> topStoreArticles,
+      final LoadingState topStoreArticlesState}) = _$DashboardBuildableImpl;
+
+  @override
+  List<Article> get breakingArticles;
+  @override
+  LoadingState get breakingArticlesState;
+  @override
+  List<Article> get topStoreArticles;
+  @override
+  LoadingState get topStoreArticlesState;
+  @override
+  @JsonKey(ignore: true)
+  _$$DashboardBuildableImplCopyWith<_$DashboardBuildableImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
