@@ -2,7 +2,7 @@ import 'package:mobile_news_with_bloc/data/responses/article/article_list_respon
 
 import '../../domain/modules/article.dart';
 
-extension ArticleExtension on ArticleResponse {
+extension ArticleResponseExtension on ArticleResponse {
   Article toArticle({bool isFavourite = false}) {
     return Article(
       id: "${author ?? ""}${title ?? ""}${url ?? ""}",
@@ -17,11 +17,5 @@ extension ArticleExtension on ArticleResponse {
       sourceId: source?.id ?? "",
       isFavourite: isFavourite,
     );
-  }
-}
-
-extension ArticleListResponseExtension on ArticleListResponse {
-  List<Article> toArticleList() {
-    return articles.map((e) => e.toArticle()).toList();
   }
 }

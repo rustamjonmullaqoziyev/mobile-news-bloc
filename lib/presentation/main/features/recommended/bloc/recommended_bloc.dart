@@ -20,6 +20,7 @@ class RecommendedBloc extends Bloc<RecommendedEvent, RecommendedState> {
   RecommendedBloc(this._articleRepository)
       : super(const RecommendedBuildable()) {
     _built = state as RecommendedBuildable;
+    on<GetRecommendedArticlesEvent>(_getRecommendedArticleEvent);
     getRecommendedArticle();
   }
 
@@ -41,5 +42,10 @@ class RecommendedBloc extends Bloc<RecommendedEvent, RecommendedState> {
       build((buildable) =>
           buildable.copyWith(recommendedArticlesState: LoadingState.error));
     }
+  }
+
+  _getRecommendedArticleEvent(
+      GetRecommendedArticlesEvent event, Emitter<RecommendedState> emit) async {
+    await getRecommendedArticle();
   }
 }

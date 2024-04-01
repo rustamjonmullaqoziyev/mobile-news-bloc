@@ -6,11 +6,11 @@ import '../../../../../core/utils/utils.dart';
 import '../../../../../domain/modules/article.dart';
 import '../../../../../domain/repositories/article_repository.dart';
 
+part 'dashboard_bloc.freezed.dart';
+
 part 'dashboard_event.dart';
 
 part 'dashboard_state.dart';
-
-part 'dashboard_bloc.freezed.dart';
 
 @Injectable()
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
@@ -19,6 +19,9 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
   DashboardBloc(this._articleRepository) : super(const DashboardBuildable()) {
     _built = state as DashboardBuildable;
+    on<AddFavoriteEvent>(_addFavoriteEvent);
+    on<GetBreakingArticleEvent>(_getBreakingArticleEvent);
+    on<GetTopArticleEvent>(_getTopArticleEvent);
     getBreakingArticle();
     getTopStoreArticle();
   }
@@ -52,5 +55,20 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       build((buildable) =>
           buildable.copyWith(topStoreArticlesState: LoadingState.error));
     }
+  }
+
+  _addFavoriteEvent(
+      AddFavoriteEvent event, Emitter<DashboardState> emit) async {
+    await _articleRepository.insertArticle(event.article);
+  }
+
+  _getBreakingArticleEvent(
+      GetBreakingArticleEvent event, Emitter<DashboardState> emit) async {
+    await getBreakingArticle();
+  }
+
+  _getTopArticleEvent(
+      GetTopArticleEvent event, Emitter<DashboardState> emit) async {
+    getTopStoreArticle();
   }
 }

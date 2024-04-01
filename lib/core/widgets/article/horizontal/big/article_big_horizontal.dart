@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_news_with_bloc/core/extensions/text_extensions.dart';
 import 'package:mobile_news_with_bloc/core/utils/utils.dart';
 
-import '../../../domain/modules/article.dart';
+import '../../../../../domain/modules/article.dart';
 
 class ArticleBigHorizontalWidget extends StatelessWidget {
   const ArticleBigHorizontalWidget(

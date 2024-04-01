@@ -1,15 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'dart:convert';
 
 part 'article_list_response.freezed.dart';
 
 part 'article_list_response.g.dart';
-
-ArticleListResponse articleListResponseFromJson(String str) =>
-    ArticleListResponse.fromJson(json.decode(str));
-
-String articleListResponseToJson(ArticleListResponse data) =>
-    json.encode(data.toJson());
 
 @freezed
 class ArticleListResponse with _$ArticleListResponse {

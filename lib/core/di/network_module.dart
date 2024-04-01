@@ -3,12 +3,11 @@ import 'package:injectable/injectable.dart';
 import 'package:mobile_news_with_bloc/data/constants/rest_header_keys.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import '../../data/data_souce/intercepters/api_key_intercepter.dart';
+import '../../data/data_source/intercepters/api_key_intercepter.dart';
 import '../constants.dart';
 
 @module
 abstract class NetworkModule {
-
   @lazySingleton
   Dio dio(ApiKeyInterceptor apiKeyInterceptor) {
     final options = BaseOptions(baseUrl: Constants.baseUrl, headers: {

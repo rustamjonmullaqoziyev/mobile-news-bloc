@@ -8,4 +8,6 @@ abstract class ArticleRepository {
   Future<List<Article>> getRecommendedArticle();
 
   Future<List<Article>> getReadLaterArticle();
+
+  Future<void> insertArticle(Article article);
 }

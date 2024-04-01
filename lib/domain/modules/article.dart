@@ -26,4 +26,18 @@ class Article {
   final String sourceName;
   final String sourceId;
   final bool isFavourite;
+
+  factory Article.fromJson(Map<String, dynamic> data) => Article(
+        id: data["id"],
+        author: data["author"],
+        title: data["title"],
+        description: data["description"],
+        url: data["url"],
+        urlToImage: data["urlToImage"],
+        publishedAt: data["publishedAt"],
+        content: data["content"],
+        sourceName: data["sourceName"],
+        sourceId: data["sourceId"],
+        isFavourite: data["isFavourite"]==1,
+      );
 }

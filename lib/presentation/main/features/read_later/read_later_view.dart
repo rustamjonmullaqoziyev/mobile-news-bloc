@@ -1,12 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_news_with_bloc/core/extensions/text_extensions.dart';
 import 'package:mobile_news_with_bloc/core/router/app_router.gr.dart';
-import 'package:mobile_news_with_bloc/core/widgets/article/article_small_vertical.dart';
+import 'package:mobile_news_with_bloc/core/widgets/article/vertical/small/article_small_vertical.dart';
+import 'package:mobile_news_with_bloc/core/widgets/article/vertical/small/article_small_vertical_empty.dart';
+import 'package:mobile_news_with_bloc/core/widgets/article/vertical/small/article_small_vertical_error_widget.dart';
 import 'package:mobile_news_with_bloc/presentation/main/features/read_later/bloc/read_later_bloc.dart';
 
 import '../../../../core/utils/utils.dart';
-import '../../../../core/widgets/article/article_small_vertical_shimmer.dart';
+import '../../../../core/widgets/article/vertical/small/article_small_vertical_shimmer.dart';
 import '../../../../core/widgets/common /buildable.dart';
 import '../../../../domain/modules/article.dart';
 
@@ -37,13 +40,20 @@ class ReadLaterView extends StatelessWidget {
                       context.router.push(DetailRoute(article: article));
                     },
                   ),
-                LoadingState.error => const ArticleSmallVerticalShimmerWidget(),
+                LoadingState.error =>
+                  ArticleSmallVerticalErrorWidget(callback: () {
+                    context
+                        .read<ReadLaterBloc>()
+                        .add(GetReadLaterArticleEvent());
+                  }),
+                LoadingState.empty => const ArticleSmallVerticalEmptyWidget(),
               };
             },
             itemCount: switch (buildable.readLaterArticlesState) {
               LoadingState.loading => 5,
               LoadingState.loaded => buildable.readLaterArticles.length,
-              LoadingState.error => 1
+              LoadingState.error => 1,
+              LoadingState.empty => 1
             }),
       ),
     );

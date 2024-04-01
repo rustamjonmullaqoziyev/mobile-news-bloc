@@ -1,18 +1,22 @@
 import 'package:injectable/injectable.dart';
 import 'package:mobile_news_with_bloc/data/constants/rest_query_keys.dart';
-import 'package:mobile_news_with_bloc/data/data_souce/service/article_service.dart';
-import 'package:mobile_news_with_bloc/data/data_souce/storage/article_storage.dart';
+import 'package:mobile_news_with_bloc/data/data_source/service/article_service.dart';
 import 'package:mobile_news_with_bloc/data/mapper/article.dart';
 import 'package:mobile_news_with_bloc/data/responses/article/article_list_response.dart';
 import 'package:mobile_news_with_bloc/domain/modules/article.dart';
 import 'package:mobile_news_with_bloc/domain/repositories/article_repository.dart';
 
+import '../data_source/database/app_database_provider.dart';
+
 @Injectable(as: ArticleRepository)
 class ArticleRepositoryImpl extends ArticleRepository {
-  ArticleRepositoryImpl(this._articleService, this.articleStorageProvider);
+  ArticleRepositoryImpl(
+    this._articleService,
+    this._appDatabaseProvider,
+  );
 
   final ArticleService _articleService;
-  final ArticleStorageProvider articleStorageProvider;
+  final AppDatabaseProvider _appDatabaseProvider;
 
   @override
   Future<List<Article>> getBreakingArticle() async {
@@ -22,9 +26,9 @@ class ArticleRepositoryImpl extends ArticleRepository {
         sortBy: RestQueryKeys.sortPopularity);
     final articles = ArticleListResponse.fromJson(response.data)
         .articles
-        .map((article) => article.toArticle())
+        ?.map((article) => article.toArticle())
         .toList();
-    return articles;
+    return articles ?? List.empty();
   }
 
   @override
@@ -55,14 +59,12 @@ class ArticleRepositoryImpl extends ArticleRepository {
 
   @override
   Future<List<Article>> getReadLaterArticle() async {
-    final response = await _articleService.getArticle(
-        country: RestQueryKeys.countryUS,
-        category: RestQueryKeys.categoryScience,
-        sortBy: RestQueryKeys.sortPopularity);
-    final articles = ArticleListResponse.fromJson(response.data)
-        .articles
-        .map((article) => article.toArticle())
-        .toList();
+    final articles = await _appDatabaseProvider.getArticles();
     return articles;
+  }
+
+  @override
+  Future<void> insertArticle(Article article) async {
+    await _appDatabaseProvider.insertArticle(article);
   }
 }
