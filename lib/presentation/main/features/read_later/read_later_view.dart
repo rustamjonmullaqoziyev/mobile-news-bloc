@@ -39,6 +39,11 @@ class ReadLaterView extends StatelessWidget {
                     callback: (Article article) {
                       context.router.push(DetailRoute(article: article));
                     },
+                    mutateFavorite: (Article article) {
+                      context
+                          .read<ReadLaterBloc>()
+                          .add(RemoveFavoriteEvent(article));
+                    },
                   ),
                 LoadingState.error =>
                   ArticleSmallVerticalErrorWidget(callback: () {

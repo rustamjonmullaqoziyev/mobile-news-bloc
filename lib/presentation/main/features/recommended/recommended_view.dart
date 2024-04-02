@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_news_with_bloc/core/extensions/text_extensions.dart';
 import 'package:mobile_news_with_bloc/core/router/app_router.gr.dart';
 import 'package:mobile_news_with_bloc/core/widgets/article/vertical/big/article_big_vertical_empty.dart';
@@ -36,6 +37,11 @@ class RecommendedView extends StatelessWidget {
                     article: buildable.recommendedArticles[index],
                     callback: (Article article) {
                       context.router.push(DetailRoute(article: article));
+                    },
+                    mutateFavorite: (Article article) {
+                      context
+                          .read<RecommendedBloc>()
+                          .add(AddFavoriteEvent(article));
                     },
                   ),
                 LoadingState.error =>

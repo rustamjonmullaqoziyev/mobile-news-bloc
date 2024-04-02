@@ -9,5 +9,7 @@ abstract class ArticleRepository {
 
   Future<List<Article>> getReadLaterArticle();
 
-  Future<void> insertArticle(Article article);
+  Future<void> addFavoriteArticle(Article article);
+
+  Future<void> removeFavoriteArticle(Article article);
 }

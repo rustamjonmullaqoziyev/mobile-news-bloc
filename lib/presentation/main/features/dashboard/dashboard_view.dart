@@ -56,6 +56,11 @@ class DashboardView extends StatelessWidget {
                                 context.router
                                     .push(DetailRoute(article: article));
                               },
+                              mutateFavorite: (Article article) {
+                                context
+                                    .read<DashboardBloc>()
+                                    .add(AddFavoriteEvent(article));
+                              },
                             ),
                           LoadingState.error =>
                             ArticleBigHorizontalErrorWidget(callback: () {
@@ -95,6 +100,11 @@ class DashboardView extends StatelessWidget {
                               callback: (Article article) {
                                 context.router
                                     .push(DetailRoute(article: article));
+                              },
+                              mutateFavorite: (Article article) {
+                                context
+                                    .read<DashboardBloc>()
+                                    .add(AddFavoriteEvent(article));
                               },
                             ),
                           LoadingState.error =>

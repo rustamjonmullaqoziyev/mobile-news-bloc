@@ -1,17 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_news_with_bloc/core/extensions/text_extensions.dart';
 import 'package:mobile_news_with_bloc/core/utils/utils.dart';
+import 'package:mobile_news_with_bloc/core/widgets/favorites/ad_favorite_widget.dart';
 
 import '../../../../../domain/modules/article.dart';
 
 class ArticleBigHorizontalWidget extends StatelessWidget {
   const ArticleBigHorizontalWidget(
-      {super.key, required this.article, required this.callback});
+      {super.key,
+      required this.article,
+      required this.callback,
+      required this.mutateFavorite});
 
   final Article article;
   final Function(Article article) callback;
+  final Function(Article article) mutateFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -33,28 +37,40 @@ class ArticleBigHorizontalWidget extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   height: 150,
-                  child: CachedNetworkImage(
-                    fit: BoxFit.fill,
-                    imageBuilder: (context, url) => Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        image: DecorationImage(
-                          image: url,
-                          fit: BoxFit.fill,
-                          colorFilter: const ColorFilter.mode(
-                            Colors.white,
-                            BlendMode.colorBurn,
+                  child: Stack(
+                    children: [
+                      CachedNetworkImage(
+                        fit: BoxFit.fill,
+                        imageBuilder: (context, url) => Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            image: DecorationImage(
+                              image: url,
+                              fit: BoxFit.fill,
+                              colorFilter: const ColorFilter.mode(
+                                Colors.white,
+                                BlendMode.colorBurn,
+                              ),
+                            ),
                           ),
                         ),
+                        imageUrl: article.urlToImage,
+                        placeholder: (context, url) => const Center(
+                            child: CircularProgressIndicator(
+                          color: Colors.blue,
+                        )),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
                       ),
-                    ),
-                    imageUrl: article.urlToImage,
-                    placeholder: (context, url) => const Center(
-                        child: CircularProgressIndicator(
-                      color: Colors.blue,
-                    )),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
+                      Align(
+                          alignment: Alignment.topRight,
+                          child: FavoriteWidget(
+                            isSelected: article.isFavourite,
+                            invoke: () {
+                              mutateFavorite(article);
+                            },
+                          )),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 10),

@@ -8,7 +8,7 @@ class ArticleSmallVerticalEmptyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
+      width: MediaQuery.of(context).size.width * 0.8,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

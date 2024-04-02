@@ -64,7 +64,13 @@ class ArticleRepositoryImpl extends ArticleRepository {
   }
 
   @override
-  Future<void> insertArticle(Article article) async {
-    await _appDatabaseProvider.insertArticle(article);
+  Future<void> addFavoriteArticle(Article article) async {
+    await _appDatabaseProvider.addFavoriteArticle(article);
   }
+
+  @override
+  Future<void> removeFavoriteArticle(Article article)  async{
+   await _appDatabaseProvider.removeFavoriteArticle(article);
+  }
+
 }

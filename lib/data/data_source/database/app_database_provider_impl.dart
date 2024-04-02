@@ -36,7 +36,7 @@ class AppDatabaseProviderImpl extends AppDatabaseProvider {
   }
 
   @override
-  Future<void> insertArticle(Article article) async {
+  Future<void> addFavoriteArticle(Article article) async {
     final db = await _databaseService.database;
     await db.rawInsert(
         'INSERT OR REPLACE INTO Article(id, author, title, description,url,urlToImage ,published, content,sourceName ,sourceId,isFavourite) VALUES(?,?,?,?,?,?,?,?,?,?,?)',
@@ -66,5 +66,11 @@ class AppDatabaseProviderImpl extends AppDatabaseProvider {
     } catch (e) {
       return List.empty();
     }
+  }
+
+  @override
+  Future<void> removeFavoriteArticle(Article article) async {
+    final db = await _databaseService.database;
+    await db.rawDelete('DELETE FROM Test WHERE id = ?', [article.id]);
   }
 }

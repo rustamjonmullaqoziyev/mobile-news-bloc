@@ -21,6 +21,7 @@ class RecommendedBloc extends Bloc<RecommendedEvent, RecommendedState> {
       : super(const RecommendedBuildable()) {
     _built = state as RecommendedBuildable;
     on<GetRecommendedArticlesEvent>(_getRecommendedArticleEvent);
+    on<AddFavoriteEvent>(_addFavoriteEvent);
     getRecommendedArticle();
   }
 
@@ -35,9 +36,14 @@ class RecommendedBloc extends Bloc<RecommendedEvent, RecommendedState> {
     try {
       final recommendedArticles =
           await _articleRepository.getRecommendedArticle();
-      build((buildable) => buildable.copyWith(
-          recommendedArticles: recommendedArticles,
-          recommendedArticlesState: LoadingState.loaded));
+      if (recommendedArticles.isNotEmpty) {
+        build((buildable) => buildable.copyWith(
+            recommendedArticles: recommendedArticles,
+            recommendedArticlesState: LoadingState.loaded));
+      } else {
+        build((buildable) =>
+            buildable.copyWith(recommendedArticlesState: LoadingState.empty));
+      }
     } catch (e) {
       build((buildable) =>
           buildable.copyWith(recommendedArticlesState: LoadingState.error));
@@ -47,5 +53,14 @@ class RecommendedBloc extends Bloc<RecommendedEvent, RecommendedState> {
   _getRecommendedArticleEvent(
       GetRecommendedArticlesEvent event, Emitter<RecommendedState> emit) async {
     await getRecommendedArticle();
+  }
+
+  _addFavoriteEvent(
+      AddFavoriteEvent event, Emitter<RecommendedState> emit) async {
+    if (event.article.isFavourite) {
+      await _articleRepository.removeFavoriteArticle(event.article);
+    } else {
+      await _articleRepository.addFavoriteArticle(event.article);
+    }
   }
 }

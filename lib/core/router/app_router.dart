@@ -10,13 +10,8 @@ class AppRouter extends $AppRouter {
             path: "/main",
             initial: true,
             children: [
-              AutoRoute(
-                page: DashboardRoute.page,
-                path: "dashboard",
-                initial: true,
-                maintainState: false
-              ),
-              AutoRoute(page: RecommendedRoute.page, path: 'recommended', maintainState: false),
+              AutoRoute(page: DashboardRoute.page, path: "dashboard"),
+              AutoRoute(page: RecommendedRoute.page, path: 'recommended'),
               AutoRoute(page: ReadLaterRoute.page, path: 'read-later'),
             ]),
         AutoRoute(page: DetailRoute.page, path: "/detail")

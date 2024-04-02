@@ -20,6 +20,7 @@ class ReadLaterBloc extends Bloc<ReadLaterEvent, ReadLaterState> {
   ReadLaterBloc(this._articleRepository) : super(const ReadLaterBuildable()) {
     _built = state as ReadLaterBuildable;
     on<GetReadLaterArticleEvent>(_getReadLaterArticleEvent);
+    on<RemoveFavoriteEvent>(_removeFavoriteEvent);
     getReadLaterArticle();
   }
 
@@ -33,9 +34,14 @@ class ReadLaterBloc extends Bloc<ReadLaterEvent, ReadLaterState> {
   Future<void> getReadLaterArticle() async {
     try {
       final readLaterArticles = await _articleRepository.getReadLaterArticle();
-      build((buildable) => buildable.copyWith(
-          readLaterArticles: readLaterArticles,
-          readLaterArticlesState: LoadingState.loaded));
+      if (readLaterArticles.isNotEmpty) {
+        build((buildable) => buildable.copyWith(
+            readLaterArticles: readLaterArticles,
+            readLaterArticlesState: LoadingState.loaded));
+      } else {
+        build((buildable) =>
+            buildable.copyWith(readLaterArticlesState: LoadingState.empty));
+      }
     } catch (e) {
       build((buildable) =>
           buildable.copyWith(readLaterArticlesState: LoadingState.error));
@@ -45,5 +51,10 @@ class ReadLaterBloc extends Bloc<ReadLaterEvent, ReadLaterState> {
   _getReadLaterArticleEvent(
       GetReadLaterArticleEvent event, Emitter<ReadLaterState> emit) async {
     await getReadLaterArticle();
+  }
+
+  _removeFavoriteEvent(
+      RemoveFavoriteEvent event, Emitter<ReadLaterState> emit) async {
+    await _articleRepository.removeFavoriteArticle(event.article);
   }
 }

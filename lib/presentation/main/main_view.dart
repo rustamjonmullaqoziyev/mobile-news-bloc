@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_news_with_bloc/core/router/app_router.gr.dart';
 
@@ -50,8 +49,8 @@ class MainView extends StatelessWidget {
                     )),
                   ),
                   BottomNavigationBarItem(
-                      label: "For You",
-                      tooltip: "For You",
+                      label: "Recommended",
+                      tooltip: "Recommended",
                       icon: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Icon(Icons.account_box_outlined),
@@ -64,8 +63,8 @@ class MainView extends StatelessWidget {
                         ),
                       )),
                   BottomNavigationBarItem(
-                      label: "Top",
-                      tooltip: "Top",
+                      label: "Read Later",
+                      tooltip: "Read Later",
                       icon: NavigationBarWidget(
                           image: Icon(Icons.bookmark_border_outlined)),
                       activeIcon: NavigationBarWidget(

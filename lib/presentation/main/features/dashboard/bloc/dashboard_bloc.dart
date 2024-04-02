@@ -36,9 +36,14 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   Future<void> getBreakingArticle() async {
     try {
       final breakingArticles = await _articleRepository.getBreakingArticle();
-      build((buildable) => buildable.copyWith(
-          breakingArticles: breakingArticles,
-          breakingArticlesState: LoadingState.loaded));
+      if (breakingArticles.isNotEmpty) {
+        build((buildable) => buildable.copyWith(
+            breakingArticles: breakingArticles,
+            breakingArticlesState: LoadingState.loaded));
+      } else {
+        build((buildable) =>
+            buildable.copyWith(breakingArticlesState: LoadingState.empty));
+      }
     } catch (e) {
       build((buildable) =>
           buildable.copyWith(breakingArticlesState: LoadingState.error));
@@ -48,9 +53,14 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   Future<void> getTopStoreArticle() async {
     try {
       final breakingArticles = await _articleRepository.getTopStoreArticle();
-      build((buildable) => buildable.copyWith(
-          topStoreArticles: breakingArticles,
-          topStoreArticlesState: LoadingState.loaded));
+      if (breakingArticles.isNotEmpty) {
+        build((buildable) => buildable.copyWith(
+            topStoreArticles: breakingArticles,
+            topStoreArticlesState: LoadingState.loaded));
+      } else {
+        build((buildable) =>
+            buildable.copyWith(topStoreArticlesState: LoadingState.empty));
+      }
     } catch (e) {
       build((buildable) =>
           buildable.copyWith(topStoreArticlesState: LoadingState.error));
@@ -59,7 +69,11 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
   _addFavoriteEvent(
       AddFavoriteEvent event, Emitter<DashboardState> emit) async {
-    await _articleRepository.insertArticle(event.article);
+    if (event.article.isFavourite) {
+      await _articleRepository.removeFavoriteArticle(event.article);
+    } else {
+      await _articleRepository.addFavoriteArticle(event.article);
+    }
   }
 
   _getBreakingArticleEvent(
