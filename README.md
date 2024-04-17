@@ -2,15 +2,20 @@
 
 Mobile news with bloc
 
-## Getting Started
+#Audiobook is sample project
 
-This project is a starting point for a Flutter application.
+In project used: 
+[Flutter Bloc](https://pub.dev/packages/flutter_bloc),
+[Bloc](https://pub.dev/packages/bloc),
+[Get_it](https://pub.dev/packages/get_it)
+[Injectable](https://pub.dev/packages/injectable), 
+[Auto route](https://pub.dev/packages/auto_route), 
+[Dio](https://pub.dev/packages/dio),
+[Sqlite](https://pub.dev/packages/sqflite),
 
-A few resources to get you started if this is your first Flutter project:
+# Screenshots
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+| <img src="https://github.com/rustamjonmullaqoziyev/mobile-news-bloc/blob/main/Screenshot_20240402_184017.jpg" width="140"> 
+| <img src="https://github.com/rustamjonmullaqoziyev/mobile-news-bloc/blob/main/Screenshot_20240402_184000.jpg" width="140"> 
+| <img src="https://github.com/rustamjonmullaqoziyev/mobile-news-bloc/blob/main/Screenshot_20240402_183942.jpg" width="140"> 
+| <img src="https://github.com/rustamjonmullaqoziyev/mobile-news-bloc/blob/main/Screenshot_20240402_184022.jpg" width="140"> 
