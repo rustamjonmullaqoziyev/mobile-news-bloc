@@ -7,8 +7,7 @@ import 'app_database_provider.dart';
 
 @LazySingleton(as: AppDatabaseProvider)
 class AppDatabaseProviderImpl extends AppDatabaseProvider {
-  static final AppDatabaseProviderImpl _databaseService =
-      AppDatabaseProviderImpl._internal();
+  static final AppDatabaseProviderImpl _databaseService = AppDatabaseProviderImpl._internal();
 
   factory AppDatabaseProviderImpl() => _databaseService;
 
@@ -60,8 +59,7 @@ class AppDatabaseProviderImpl extends AppDatabaseProvider {
     try {
       final db = await _databaseService.database;
       var data = await db.rawQuery('SELECT * FROM Article');
-      List<Article> articles =
-          List.generate(data.length, (index) => Article.fromJson(data[index]));
+      List<Article> articles = List.generate(data.length, (index) => Article.fromJson(data[index]));
       return articles;
     } catch (e) {
       return List.empty();
@@ -71,6 +69,6 @@ class AppDatabaseProviderImpl extends AppDatabaseProvider {
   @override
   Future<void> removeFavoriteArticle(Article article) async {
     final db = await _databaseService.database;
-    await db.rawDelete('DELETE FROM Test WHERE id = ?', [article.id]);
+    await db.rawDelete('DELETE FROM Article WHERE id = ?', [article.id]);
   }
 }

@@ -19,9 +19,7 @@ class ReadLaterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Buildable<ReadLaterBloc, ReadLaterState, ReadLaterBuildable>(
-      properties: (buildable) => [
-        buildable.readLaterArticlesState,
-      ],
+      properties: (buildable) => [buildable.readLaterArticlesState, buildable.readLaterArticles],
       builder: (BuildContext context, buildable) => Scaffold(
         backgroundColor: const Color(0xFFF0F0F0),
         appBar: AppBar(
@@ -32,24 +30,18 @@ class ReadLaterView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 4),
             itemBuilder: (BuildContext context, int index) {
               return switch (buildable.readLaterArticlesState) {
-                LoadingState.loading =>
-                  const ArticleSmallVerticalShimmerWidget(),
+                LoadingState.loading => const ArticleSmallVerticalShimmerWidget(),
                 LoadingState.loaded => ArticleSmallVerticalWidget(
                     article: buildable.readLaterArticles[index],
                     callback: (Article article) {
                       context.router.push(DetailRoute(article: article));
                     },
                     mutateFavorite: (Article article) {
-                      context
-                          .read<ReadLaterBloc>()
-                          .add(RemoveFavoriteEvent(article));
+                      context.read<ReadLaterBloc>().add(RemoveFavoriteEvent(article));
                     },
                   ),
-                LoadingState.error =>
-                  ArticleSmallVerticalErrorWidget(callback: () {
-                    context
-                        .read<ReadLaterBloc>()
-                        .add(GetReadLaterArticleEvent());
+                LoadingState.error => ArticleSmallVerticalErrorWidget(callback: () {
+                    context.read<ReadLaterBloc>().add(GetReadLaterArticleEvent());
                   }),
                 LoadingState.empty => const ArticleSmallVerticalEmptyWidget(),
               };

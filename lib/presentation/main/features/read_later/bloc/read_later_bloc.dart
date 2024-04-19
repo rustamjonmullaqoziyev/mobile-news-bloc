@@ -35,26 +35,31 @@ class ReadLaterBloc extends Bloc<ReadLaterEvent, ReadLaterState> {
     try {
       final readLaterArticles = await _articleRepository.getReadLaterArticle();
       if (readLaterArticles.isNotEmpty) {
-        build((buildable) => buildable.copyWith(
-            readLaterArticles: readLaterArticles,
-            readLaterArticlesState: LoadingState.loaded));
-      } else {
         build((buildable) =>
-            buildable.copyWith(readLaterArticlesState: LoadingState.empty));
+            buildable.copyWith(readLaterArticles: readLaterArticles, readLaterArticlesState: LoadingState.loaded));
+      } else {
+        build((buildable) => buildable.copyWith(readLaterArticlesState: LoadingState.empty));
       }
     } catch (e) {
-      build((buildable) =>
-          buildable.copyWith(readLaterArticlesState: LoadingState.error));
+      build((buildable) => buildable.copyWith(readLaterArticlesState: LoadingState.error));
     }
   }
 
-  _getReadLaterArticleEvent(
-      GetReadLaterArticleEvent event, Emitter<ReadLaterState> emit) async {
+  _getReadLaterArticleEvent(GetReadLaterArticleEvent event, Emitter<ReadLaterState> emit) async {
     await getReadLaterArticle();
   }
 
-  _removeFavoriteEvent(
-      RemoveFavoriteEvent event, Emitter<ReadLaterState> emit) async {
-    await _articleRepository.removeFavoriteArticle(event.article);
+  _removeFavoriteEvent(RemoveFavoriteEvent event, Emitter<ReadLaterState> emit) async {
+    try {
+      await _articleRepository.removeFavoriteArticle(event.article);
+      List<Article> list = <Article>[];
+      for (var element in _built.readLaterArticles) {
+        if (element.id != event.article.id) list.add(element);
+      }
+      build((buildable) => buildable.copyWith(
+          readLaterArticles: list, readLaterArticlesState: list.isEmpty ? LoadingState.empty : LoadingState.loaded));
+    } catch (e) {
+      build((buildable) => buildable.copyWith(readLaterArticlesState: LoadingState.error));
+    }
   }
 }
