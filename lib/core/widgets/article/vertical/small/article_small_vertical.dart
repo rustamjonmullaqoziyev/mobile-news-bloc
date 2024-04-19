@@ -46,18 +46,14 @@ class ArticleSmallVerticalWidget extends StatelessWidget {
                         .copyWith(maxLines: 1, overflow: TextOverflow.ellipsis),
                     const SizedBox(height: 10),
                     Expanded(
-                      child:
-                          article.title.w(400).s(15).c(Colors.black).copyWith(
-                                maxLines: 6,
-                                overflow: TextOverflow.ellipsis,
-                              ),
+                      child: article.title.w(400).s(15).c(Colors.black).copyWith(
+                            maxLines: 6,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                     ),
                     const SizedBox(height: 10),
                     article.publishedAt != null
-                        ? article.publishedAt!.formattedDate
-                            .w(400)
-                            .s(16)
-                            .c(Colors.grey)
+                        ? article.publishedAt!.formattedDate.w(400).s(16).c(Colors.grey)
                         : "".w(400).s(16).c(Colors.grey)
                   ],
                 ),
@@ -88,8 +84,7 @@ class ArticleSmallVerticalWidget extends StatelessWidget {
                           child: CircularProgressIndicator(
                         color: Colors.blue,
                       )),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
+                      errorWidget: (context, url, error) => const Icon(Icons.error),
                     ),
                     Align(
                         alignment: Alignment.topRight,
@@ -98,6 +93,7 @@ class ArticleSmallVerticalWidget extends StatelessWidget {
                           invoke: () {
                             mutateFavorite(article);
                           },
+                          isChangeAvailable: false,
                         )),
                   ],
                 ),

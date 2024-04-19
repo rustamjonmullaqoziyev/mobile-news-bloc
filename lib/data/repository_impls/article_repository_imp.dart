@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:mobile_news_with_bloc/core/extensions/article_extensions.dart';
 import 'package:mobile_news_with_bloc/data/constants/rest_query_keys.dart';
 import 'package:mobile_news_with_bloc/data/data_source/service/article_service.dart';
 import 'package:mobile_news_with_bloc/data/mapper/article.dart';
@@ -24,11 +25,24 @@ class ArticleRepositoryImpl extends ArticleRepository {
         country: RestQueryKeys.countryUS,
         category: RestQueryKeys.categoryScience,
         sortBy: RestQueryKeys.sortPopularity);
-    final articles = ArticleListResponse.fromJson(response.data)
-        .articles
-        ?.map((article) => article.toArticle())
-        .toList();
-    return articles ?? List.empty();
+    final articles =
+        ArticleListResponse.fromJson(response.data).articles.map((article) => article.toArticle()).toList();
+    final savedArticle = await _appDatabaseProvider.getArticles();
+    List<Article> result = <Article>[];
+    for (var element in articles) {
+      List<Article> similar = <Article>[];
+      for (var element2 in savedArticle) {
+        if (element.id == element2.id) {
+          similar.add(element2);
+        }
+      }
+      if (similar.isNotEmpty) {
+        result.add(element.mapTo(true));
+      }else{
+        result.add(element);
+      }
+    }
+    return result;
   }
 
   @override
@@ -37,11 +51,24 @@ class ArticleRepositoryImpl extends ArticleRepository {
         country: RestQueryKeys.countryUS,
         category: RestQueryKeys.categoryGeneral,
         sortBy: RestQueryKeys.sortPopularity);
-    final articles = ArticleListResponse.fromJson(response.data)
-        .articles
-        .map((article) => article.toArticle())
-        .toList();
-    return articles;
+    final articles =
+        ArticleListResponse.fromJson(response.data).articles.map((article) => article.toArticle()).toList();
+    final savedArticle = await _appDatabaseProvider.getArticles();
+    List<Article> result = <Article>[];
+    for (var element in articles) {
+      List<Article> similar = <Article>[];
+      for (var element2 in savedArticle) {
+        if (element.id == element2.id) {
+          similar.add(element2);
+        }
+      }
+      if (similar.isNotEmpty) {
+        result.add(element.mapTo(true));
+      }else{
+        result.add(element);
+      }
+    }
+    return result;
   }
 
   @override
@@ -50,17 +77,34 @@ class ArticleRepositoryImpl extends ArticleRepository {
         country: RestQueryKeys.countryUS,
         category: RestQueryKeys.categoryScience,
         sortBy: RestQueryKeys.sortPopularity);
-    final articles = ArticleListResponse.fromJson(response.data)
-        .articles
-        .map((article) => article.toArticle())
-        .toList();
-    return articles;
+    final articles =
+        ArticleListResponse.fromJson(response.data).articles.map((article) => article.toArticle()).toList();
+    final savedArticle = await _appDatabaseProvider.getArticles();
+    List<Article> result = <Article>[];
+    for (var element in articles) {
+      List<Article> similar = <Article>[];
+      for (var element2 in savedArticle) {
+        if (element.id == element2.id) {
+          similar.add(element2);
+        }
+      }
+      if (similar.isNotEmpty) {
+        result.add(element.mapTo(true));
+      }else{
+        result.add(element);
+      }
+    }
+    return result;
   }
 
   @override
   Future<List<Article>> getReadLaterArticle() async {
     final articles = await _appDatabaseProvider.getArticles();
-    return articles;
+    List<Article> newArticles = <Article>[];
+    for (var element in articles) {
+      newArticles.add(element.mapTo(true));
+    }
+    return newArticles;
   }
 
   @override
@@ -69,8 +113,7 @@ class ArticleRepositoryImpl extends ArticleRepository {
   }
 
   @override
-  Future<void> removeFavoriteArticle(Article article)  async{
-   await _appDatabaseProvider.removeFavoriteArticle(article);
+  Future<void> removeFavoriteArticle(Article article) async {
+    await _appDatabaseProvider.removeFavoriteArticle(article);
   }
-
 }

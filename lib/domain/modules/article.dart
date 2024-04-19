@@ -38,6 +38,6 @@ class Article {
         content: data["content"],
         sourceName: data["sourceName"],
         sourceId: data["sourceId"],
-        isFavourite: data["isFavourite"]==1,
+        isFavourite: data["isFavourite"] == 1,
       );
 }
