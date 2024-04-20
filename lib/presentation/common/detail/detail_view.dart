@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_news_with_bloc/core/extensions/text_extensions.dart';
 import 'package:mobile_news_with_bloc/core/utils/utils.dart';
 import 'package:mobile_news_with_bloc/presentation/common/detail/bloc/detail_bloc.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../core/widgets/favorites/ad_favorite_widget.dart';
 import '../../../domain/modules/article.dart';
@@ -31,6 +32,12 @@ class DetailView extends StatelessWidget {
             ),
           ),
           actions: [
+            IconButton(
+              onPressed: () {
+                Share.share("${article.title} ${article.description} ${article.content} ${article.url}");
+              },
+              icon: const Icon(Icons.share),
+            ),
             FavoriteWidget(
                 isSelected: article.isFavourite,
                 invoke: () {
