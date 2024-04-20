@@ -6,8 +6,12 @@ class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(page: MainRoute.page, path: "/main", initial: true, children: [
-          AutoRoute(page: DashboardRoute.page, path: "dashboard"),
-          AutoRoute(page: RecommendedRoute.page, path: 'recommended'),
+          AutoRoute(page: DashboardRoute.page, path: "dashboard", maintainState: false),
+          AutoRoute(
+            page: RecommendedRoute.page,
+            path: 'recommended',
+            maintainState: false,
+          ),
           AutoRoute(page: ReadLaterRoute.page, path: 'read-later', maintainState: false),
         ]),
         AutoRoute(page: DetailRoute.page, path: "/detail")

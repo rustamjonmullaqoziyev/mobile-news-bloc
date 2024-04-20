@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_news_with_bloc/core/extensions/text_extensions.dart';
 import 'package:mobile_news_with_bloc/core/utils/utils.dart';
+import 'package:mobile_news_with_bloc/presentation/common/detail/bloc/detail_bloc.dart';
 
+import '../../../core/widgets/favorites/ad_favorite_widget.dart';
 import '../../../domain/modules/article.dart';
 
 class DetailView extends StatelessWidget {
@@ -28,6 +30,13 @@ class DetailView extends StatelessWidget {
               color: Colors.black,
             ),
           ),
+          actions: [
+            FavoriteWidget(
+                isSelected: article.isFavourite,
+                invoke: () {
+                  context.read<DetailBloc>().add(AddFavoriteEvent(article));
+                })
+          ],
         ),
         body: Container(
           width: double.infinity,
@@ -65,16 +74,11 @@ class DetailView extends StatelessWidget {
                         child: CircularProgressIndicator(
                       color: Colors.blue,
                     )),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
+                    errorWidget: (context, url, error) => const Icon(Icons.error),
                   ),
                 ),
                 const SizedBox(height: 10),
-                article.sourceName
-                    .w(500)
-                    .s(20)
-                    .c(Colors.black)
-                    .copyWith(maxLines: 1, overflow: TextOverflow.ellipsis),
+                article.sourceName.w(500).s(20).c(Colors.black).copyWith(maxLines: 1, overflow: TextOverflow.ellipsis),
                 const SizedBox(height: 10),
                 article.description.w(400).s(15).c(Colors.black).copyWith(
                       maxLines: 3,
@@ -82,10 +86,7 @@ class DetailView extends StatelessWidget {
                     ),
                 const SizedBox(height: 10),
                 article.publishedAt != null
-                    ? article.publishedAt!.formattedDate
-                        .w(400)
-                        .s(16)
-                        .c(Colors.grey)
+                    ? article.publishedAt!.formattedDate.w(400).s(16).c(Colors.grey)
                     : "".w(400).s(16).c(Colors.grey),
                 const SizedBox(height: 10),
                 article.content.w(400).s(15).c(Colors.black).copyWith(
