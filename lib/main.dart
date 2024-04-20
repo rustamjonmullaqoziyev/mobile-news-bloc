@@ -27,13 +27,11 @@ class MyApp extends StatelessWidget {
         lazy: false,
         create: (_) => getIt<MainBloc>(),
         child: Buildable<MainBloc, MainState, MainBuildable>(
-          properties: (buildable) => [buildable.isDark],
+          properties: (buildable) => [buildable.isDark, buildable.isConnection],
           builder: (BuildContext context, buildable) {
             buildable.isDark
-                ? SystemChrome.setSystemUIOverlayStyle(
-                    SystemUiOverlayStyle.dark)
-                : SystemChrome.setSystemUIOverlayStyle(
-                    SystemUiOverlayStyle.light  );
+                ? SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark)
+                : SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
             return MaterialApp.router(
               routerConfig: _appRouter.config(),
               theme: ThemeData(

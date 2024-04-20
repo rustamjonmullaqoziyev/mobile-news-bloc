@@ -1,8 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_news_with_bloc/core/gen/assets/assets.gen.dart';
 import 'package:mobile_news_with_bloc/core/router/app_router.gr.dart';
-
-import '../../core/widgets/bottom_navigation/navigation_bar.dart';
 
 class MainView extends StatelessWidget {
   const MainView({super.key});
@@ -21,7 +20,7 @@ class MainView extends StatelessWidget {
             resizeToAvoidBottomInset: false,
             body: child,
             bottomNavigationBar: Container(
-              height: 82,
+              height: 64,
               decoration: const BoxDecoration(
                 border: Border(
                   top: BorderSide(width: 0.50, color: Color(0xFFE5E9F3)),
@@ -37,42 +36,23 @@ class MainView extends StatelessWidget {
                 onTap: (index) {
                   tabsRouter.setActiveIndex(index);
                 },
-                items: const [
+                items: [
                   BottomNavigationBarItem(
                     label: "Dashboard",
                     tooltip: "Dashboard",
-                    icon: NavigationBarWidget(image: Icon(Icons.dashboard)),
-                    activeIcon: NavigationBarWidget(
-                        image: Icon(
-                      Icons.dashboard,
-                      color: Colors.black,
-                    )),
+                    icon: Assets.images.icBottomNavigationHome.svg(width: 24, height: 24),
+                    activeIcon: Assets.images.icBottomNavigationHomeActive.svg(width: 24, height: 24),
                   ),
                   BottomNavigationBarItem(
                       label: "Recommended",
                       tooltip: "Recommended",
-                      icon: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(Icons.account_box_outlined),
-                      ),
-                      activeIcon: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.account_box_outlined,
-                          color: Colors.black,
-                        ),
-                      )),
+                      icon: Assets.images.icBottomNavigationRecommended.svg(width: 24, height: 24),
+                      activeIcon: Assets.images.icBottomNavigationRecommendedActive.svg(width: 24, height: 24)),
                   BottomNavigationBarItem(
                       label: "Read Later",
                       tooltip: "Read Later",
-                      icon: NavigationBarWidget(
-                          image: Icon(Icons.bookmark_border_outlined)),
-                      activeIcon: NavigationBarWidget(
-                        image: Icon(
-                          Icons.bookmark_border_outlined,
-                          color: Colors.black,
-                        ),
-                      )),
+                      icon: Assets.images.icBottomNavigationBookmark.svg(width: 24, height: 24),
+                      activeIcon: Assets.images.icBottomNavigationBookmarkActive.svg(width: 24, height: 24)),
                 ],
               ),
             ));
