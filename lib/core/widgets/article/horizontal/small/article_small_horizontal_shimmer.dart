@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_news_with_bloc/core/colors/color_extension.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ArticleSmallHorizontalShimmerWidget extends StatelessWidget {
@@ -13,7 +14,7 @@ class ArticleSmallHorizontalShimmerWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: Colors.white,
+        color: context.colors.colorCardBackground,
       ),
       child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -21,52 +22,52 @@ class ArticleSmallHorizontalShimmerWidget extends StatelessWidget {
           children: [
             Shimmer.fromColors(
                 enabled: true,
-                baseColor: Colors.grey[300]!,
-                highlightColor: Colors.grey[100]!,
+                baseColor: context.colors.colorShimmerBase,
+                highlightColor:context.colors.colorShimmerHighlight,
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: Colors.white,
+                    color:context.colors.colorCardBackground,
                   ),
                   width: double.infinity,
                   height: 150,
                 )),
             const SizedBox(height: 10),
             Shimmer.fromColors(
-                baseColor: Colors.grey[300]!,
-                highlightColor: Colors.grey[100]!,
+                baseColor:  context.colors.colorShimmerBase,
+                highlightColor:context.colors.colorShimmerHighlight,
                 child: Container(
                   width: 120,
                   height: 24,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: Colors.white,
+                    color: context.colors.colorCardBackground,
                   ),
                 )),
             const SizedBox(height: 10),
             Expanded(
               child: Shimmer.fromColors(
-                  baseColor: Colors.grey[300]!,
-                  highlightColor: Colors.grey[100]!,
+                  baseColor: context.colors.colorShimmerBase,
+                  highlightColor:context.colors.colorShimmerHighlight,
                   child: Container(
                     width: double.infinity,
                     height: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: Colors.white,
+                      color: context.colors.colorCardBackground,
                     ),
                   )),
             ),
             const SizedBox(height: 10),
             Shimmer.fromColors(
-                baseColor: Colors.grey[300]!,
-                highlightColor: Colors.grey[100]!,
+                baseColor:  context.colors.colorShimmerBase,
+                highlightColor:context.colors.colorShimmerHighlight,
                 child: Container(
                   width: 140,
                   height: 16,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: Colors.white,
+                    color: context.colors.colorCardBackground,
                   ),
                 )),
           ]),

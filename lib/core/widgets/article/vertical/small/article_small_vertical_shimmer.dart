@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_news_with_bloc/core/colors/color_extension.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ArticleSmallVerticalShimmerWidget extends StatelessWidget {
@@ -13,7 +14,7 @@ class ArticleSmallVerticalShimmerWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: Colors.white,
+        color: context.colors.colorCardBackground,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,40 +27,40 @@ class ArticleSmallVerticalShimmerWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Shimmer.fromColors(
-                    baseColor: Colors.grey[300]!,
-                    highlightColor: Colors.grey[100]!,
+                    baseColor: context.colors.colorShimmerBase,
+                    highlightColor:context.colors.colorShimmerHighlight,
                     child: Container(
                       width: 120,
                       height: 24,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-                        color: Colors.white,
+                        color: context.colors.colorCardBackground,
                       ),
                     )),
                 const SizedBox(height: 10),
                 Expanded(
                   child: Shimmer.fromColors(
-                      baseColor: Colors.grey[300]!,
-                      highlightColor: Colors.grey[100]!,
+                      baseColor: context.colors.colorShimmerBase,
+                      highlightColor:context.colors.colorShimmerHighlight,
                       child: Container(
                         width: double.infinity,
                         height: double.infinity,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color: Colors.white,
+                          color: context.colors.colorCardBackground,
                         ),
                       )),
                 ),
                 const SizedBox(height: 10),
                 Shimmer.fromColors(
-                    baseColor: Colors.grey[300]!,
-                    highlightColor: Colors.grey[100]!,
+                    baseColor: context.colors.colorShimmerBase,
+                    highlightColor:context.colors.colorShimmerHighlight,
                     child: Container(
                       width: 140,
                       height: 16,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-                        color: Colors.white,
+                        color: context.colors.colorCardBackground,
                       ),
                     )),
               ],
@@ -68,12 +69,12 @@ class ArticleSmallVerticalShimmerWidget extends StatelessWidget {
           const SizedBox(width: 8),
           Shimmer.fromColors(
               enabled: true,
-              baseColor: Colors.grey[300]!,
-              highlightColor: Colors.grey[100]!,
+              baseColor: context.colors.colorShimmerBase,
+              highlightColor:context.colors.colorShimmerHighlight,
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: Colors.white,
+                  color: context.colors.colorCardBackground,
                 ),
                 width: 100,
                 height: 100,

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_news_with_bloc/core/colors/color_extension.dart';
 import 'package:mobile_news_with_bloc/core/extensions/text_extensions.dart';
 import 'package:mobile_news_with_bloc/core/router/app_router.gr.dart';
 import 'package:mobile_news_with_bloc/core/widgets/article/vertical/big/article_big_vertical_empty.dart';
@@ -23,10 +24,10 @@ class RecommendedView extends StatelessWidget {
         buildable.recommendedArticlesState,
       ],
       builder: (BuildContext context, buildable) => Scaffold(
-        backgroundColor: const Color(0xFFF0F0F0),
+        backgroundColor: context.colors.colorBackgroundPrimary,
         appBar: AppBar(
-          backgroundColor: const Color(0xFFF0F0F0),
-          title: "Recommended ".w(500).s(20).c(Colors.black),
+          backgroundColor: context.colors.colorBackgroundPrimary,
+          title: "Recommended ".w(500).s(20).c(context.colors.colorTextPrimary),
         ),
         body: ListView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -39,13 +40,10 @@ class RecommendedView extends StatelessWidget {
                       context.router.push(DetailRoute(article: article));
                     },
                     mutateFavorite: (Article article) {
-                      context
-                          .read<RecommendedBloc>()
-                          .add(AddFavoriteEvent(article));
+                      context.read<RecommendedBloc>().add(AddFavoriteEvent(article));
                     },
                   ),
-                LoadingState.error =>
-                  ArticleBigVerticalErrorWidget(callback: () {}),
+                LoadingState.error => ArticleBigVerticalErrorWidget(callback: () {}),
                 LoadingState.empty => const ArticleBigVerticalEmptyWidget(),
               };
             },

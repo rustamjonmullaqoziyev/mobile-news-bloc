@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_news_with_bloc/core/colors/color_extension.dart';
 import 'package:mobile_news_with_bloc/core/extensions/text_extensions.dart';
 
 class ArticleBigHorizontalEmptyWidget extends StatelessWidget {
@@ -15,7 +16,7 @@ class ArticleBigHorizontalEmptyWidget extends StatelessWidget {
           "Nothing found"
               .w(500)
               .s(24)
-              .c(Colors.black)
+              .c(context.colors.colorTextPrimary)
               .copyWith(textAlign: TextAlign.center)
         ],
       ),

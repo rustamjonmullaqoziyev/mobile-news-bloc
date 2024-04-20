@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_news_with_bloc/core/colors/color_extension.dart';
 import 'package:mobile_news_with_bloc/core/extensions/text_extensions.dart';
 import 'package:mobile_news_with_bloc/core/router/app_router.gr.dart';
 import 'package:mobile_news_with_bloc/core/widgets/article/vertical/small/article_small_vertical.dart';
@@ -21,10 +22,10 @@ class ReadLaterView extends StatelessWidget {
     return Buildable<ReadLaterBloc, ReadLaterState, ReadLaterBuildable>(
       properties: (buildable) => [buildable.readLaterArticlesState, buildable.readLaterArticles],
       builder: (BuildContext context, buildable) => Scaffold(
-        backgroundColor: const Color(0xFFF0F0F0),
+        backgroundColor: context.colors.colorBackgroundPrimary,
         appBar: AppBar(
-          backgroundColor: const Color(0xFFF0F0F0),
-          title: "Top ".w(500).s(20).c(Colors.black),
+          backgroundColor: context.colors.colorBackgroundPrimary,
+          title: "Top ".w(500).s(20).c(context.colors.colorTextPrimary),
         ),
         body: ListView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 4),

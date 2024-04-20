@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_news_with_bloc/core/colors/color_extension.dart';
 import 'package:mobile_news_with_bloc/core/extensions/text_extensions.dart';
 import 'package:mobile_news_with_bloc/core/utils/utils.dart';
 import 'package:mobile_news_with_bloc/presentation/common/detail/bloc/detail_bloc.dart';
@@ -18,18 +19,15 @@ class DetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xFFF0F0F0),
+        backgroundColor: context.colors.colorBackgroundPrimary,
         appBar: AppBar(
-          backgroundColor: const Color(0xFFF0F0F0),
-          title: article.title.w(500).s(16).c(Colors.black),
+          backgroundColor: context.colors.colorBackgroundPrimary,
+          title: article.title.w(500).s(16).c(context.colors.colorTextPrimary),
           leading: IconButton(
             onPressed: () {
               context.router.maybePop();
             },
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-            ),
+            icon: Icon(Icons.arrow_back, color: context.colors.colorIcon),
           ),
           actions: [
             IconButton(
@@ -50,10 +48,7 @@ class DetailView extends StatelessWidget {
           height: double.infinity,
           margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: Colors.white,
-          ),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: context.colors.colorCardBackground),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,9 +80,13 @@ class DetailView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10),
-                article.sourceName.w(500).s(20).c(Colors.black).copyWith(maxLines: 1, overflow: TextOverflow.ellipsis),
+                article.sourceName
+                    .w(500)
+                    .s(20)
+                    .c(context.colors.colorTextPrimary)
+                    .copyWith(maxLines: 1, overflow: TextOverflow.ellipsis),
                 const SizedBox(height: 10),
-                article.description.w(400).s(15).c(Colors.black).copyWith(
+                article.description.w(400).s(15).c(context.colors.colorTextPrimary).copyWith(
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -96,7 +95,7 @@ class DetailView extends StatelessWidget {
                     ? article.publishedAt!.formattedDate.w(400).s(16).c(Colors.grey)
                     : "".w(400).s(16).c(Colors.grey),
                 const SizedBox(height: 10),
-                article.content.w(400).s(15).c(Colors.black).copyWith(
+                article.content.w(400).s(15).c(context.colors.colorTextPrimary).copyWith(
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),

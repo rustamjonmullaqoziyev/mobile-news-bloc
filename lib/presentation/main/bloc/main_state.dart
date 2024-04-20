@@ -4,7 +4,7 @@ abstract class MainState {}
 
 @freezed
 class MainBuildable extends MainState with _$MainBuildable {
-  const factory MainBuildable({Language? language, @Default(true) bool isDark, @Default(false) bool isConnection}) =
+  const factory MainBuildable({Language? language, @Default(false) bool isDark, @Default(false) bool isConnection}) =
       _MainBuildable;
 }
 

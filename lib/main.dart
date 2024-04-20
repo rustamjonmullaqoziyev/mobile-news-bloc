@@ -33,13 +33,12 @@ class MyApp extends StatelessWidget {
                 ? SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark)
                 : SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
             return MaterialApp.router(
-              routerConfig: _appRouter.config(),
-              theme: ThemeData(
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-                useMaterial3: true,
-              ),
-              debugShowCheckedModeBanner: false,
-            );
+                routerConfig: _appRouter.config(),
+                theme: ThemeData(
+                  colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                  useMaterial3: true,
+                ),
+                debugShowCheckedModeBanner: false);
           },
         ));
   }

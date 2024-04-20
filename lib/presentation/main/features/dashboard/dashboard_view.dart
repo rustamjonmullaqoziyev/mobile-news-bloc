@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_news_with_bloc/core/colors/color_extension.dart';
 import 'package:mobile_news_with_bloc/core/extensions/text_extensions.dart';
 import 'package:mobile_news_with_bloc/core/router/app_router.gr.dart';
 import 'package:mobile_news_with_bloc/core/utils/utils.dart';
@@ -31,12 +32,12 @@ class DashboardView extends StatelessWidget {
       ],
       builder: (BuildContext context, buildable) {
         return Scaffold(
-            backgroundColor: const Color(0xFFF0F0F0),
+            backgroundColor: context.colors.colorBackgroundPrimary,
             body: ListView(
               children: [
                 Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: "Breaking News".w(500).s(20).c(Colors.black)),
+                    child: "Breaking News".w(500).s(20).c(context.colors.colorTextPrimary)),
                 const SizedBox(height: 16),
                 SizedBox(
                   height: 300,
@@ -83,7 +84,7 @@ class DashboardView extends StatelessWidget {
                 const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: "Top Stories".w(500).s(20).c(Colors.black),
+                  child: "Top Stories".w(500).s(20).c(context.colors.colorTextPrimary),
                 ),
                 const SizedBox(height: 20),
                 SizedBox(
